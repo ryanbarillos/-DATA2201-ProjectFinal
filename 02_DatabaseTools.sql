@@ -94,7 +94,7 @@ GO
 
 -- 5. Add Bank Manager
 GO
-CREATE PROCEDURE Add_BankManager
+CREATE PROCEDURE mkManager
     @MgrName VARCHAR(50),
     @MgrAddress VARCHAR(50),
     @MgrWorkStarted DATE
@@ -123,7 +123,7 @@ END;
 
 -- 6. Move Bank Employee
 GO
-CREATE PROCEDURE Move_BankEmployee
+CREATE PROCEDURE mvEmployee
     (@BranchID INT,
     @EmpID INT)
 AS
@@ -235,7 +235,7 @@ BEGIN
         DECLARE @EmpID AS INT = (SELECT EmpID
         FROM BankEmployee
         WHERE MgrID = @MgrID AND EmpType = @EmpType AND EmpName = @EmpName AND EmpAddress = @EmpAddress AND IsOfficeWorker = @IsOfficeWorker AND WorkStarted = @WorkStarted);
-        EXEC Move_BankEmployee @BranchID, @EmpID;
+        EXEC mvEmployee @BranchID, @EmpID;
     END;
     ELSE
     BEGIN
@@ -252,7 +252,7 @@ GO
     8. Add Bank Customer
 */
 GO
-CREATE PROCEDURE Add_BankCustomer
+CREATE PROCEDURE mkCustomer
     @BranchID INT,
     @CustNameFirst VARCHAR(50),
     @CustNameLast VARCHAR(50),
@@ -300,7 +300,7 @@ GO
 
 -- 11. Relationship with Officer and Customer
 GO
-CREATE PROCEDURE Add_EmpCustRelationship
+CREATE PROCEDURE mkRelationship
     (@EmpID AS INT,
     @CustID AS INT)
 AS
@@ -429,7 +429,7 @@ GO
 -- FROM AccountSavings;
 
 
--- EXEC spAdd_EmpCustRelationship @EmpID = 2, @CustID = 7;
+-- EXEC spmkRelationship @EmpID = 2, @CustID = 7;
 
 -- Disconnect to current database for it to be easily dropped
 USE master;
